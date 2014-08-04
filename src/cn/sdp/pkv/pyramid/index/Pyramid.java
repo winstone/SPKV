@@ -17,7 +17,7 @@ public abstract class Pyramid {
 	/**
 	 * Get the slice which may contain data that can satisfy the (point) query
 	 * condition.
-	 * 
+	 *  
 	 * @param origin
 	 * @return
 	 */

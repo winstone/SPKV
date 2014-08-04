@@ -12,7 +12,7 @@ public class PyramidResult {
 
 	public double[] getNorCols() {
 		return norCols;
-	}
+	} 
 
 	public double getPv() {
 		return pv;

@@ -54,7 +54,7 @@ public class PyramidTest {
 	private static PKVManager pMan = PKVManager.getInstance();
 
 	public static void main(String[] args) throws InterruptedException {
-		// TODO Auto-generated method stub
+		
 //		System.out.println(Configs.PEER_TIMEOUT);
 //		List<SPKVObject> testobjs = inputSPKVObject(00000, 10000, 0);
 //		System.out.println("Loaded");  
@@ -119,16 +119,16 @@ public class PyramidTest {
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -300,13 +300,13 @@ public class PyramidTest {
 			}
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -339,18 +339,23 @@ public class PyramidTest {
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return objects;
 	}
 
+	/**
+	 * Generate random data and store the generated data into a file.
+	 * @param size
+	 * @param offset
+	 */
 	public static void generateSPKVObjects(int size, int offset)
 	{
 		int fileOffset = offset / 5000000;
@@ -399,10 +404,10 @@ public class PyramidTest {
 			md5byte = md5.digest();
 		
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return byteToString(md5byte);

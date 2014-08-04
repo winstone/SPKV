@@ -33,7 +33,7 @@ public class PyramidIndexTable {
 	private final Pyramid py;
 
 	public PyramidConverter getConverter() {
-		return converter;
+		return converter; 
 	}
 	
 	public TableInfo getTbInfo() {

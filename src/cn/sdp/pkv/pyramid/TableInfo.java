@@ -12,7 +12,12 @@ public class TableInfo implements Serializable {
 	private final List<String> indexColumn;
 	private final List<String> indexContent;
 	private final int dimension;
-	private final boolean type;
+	/**
+	 * To mark the table's type:
+	 * <li>True means the table uses SP-Index;</li>
+	 * <li>False means the table uses original pyramid index.</li>
+	 */
+	private final boolean type; 
 	
 	public TableInfo(String tableName, List<Integer> lb, List<Integer> ub, int dimension, boolean type) {
 		this.lb = lb;

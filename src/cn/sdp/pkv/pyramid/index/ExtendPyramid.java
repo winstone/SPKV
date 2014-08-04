@@ -8,7 +8,7 @@ import java.util.List;
 import cn.sdp.pkv.pyramid.model.PyramidResult;
 import cn.sdp.pkv.util.Configs;
 
-
+ 
 public class ExtendPyramid extends Pyramid{
 	private double hvInterval;
 	private int hvDimension;

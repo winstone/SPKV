@@ -13,7 +13,6 @@ import cn.sdp.pkv.store.MapDBConnector;
 import cn.sdp.pkv.store.model.IndexObject;
 import cn.sdp.pkv.thrift.SPKVObject;
 import cn.sdp.pkv.thrift.SPKVRow;
-import cn.sdp.pkv.util.Configs;
 
 public class PKVManager {
 	private static PKVManager instance = new PKVManager();
