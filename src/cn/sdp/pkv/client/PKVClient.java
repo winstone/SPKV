@@ -54,9 +54,9 @@ public class PKVClient implements Runnable {
 	private int interval = 24*60*60*1000;
 	private SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd");
 
-//	private List<String> hosts = Arrays.asList("192.168.3.55");
-	private List<String> hosts = Arrays.asList("219.224.171.142","219.224.171.141","219.224.171.140","219.224.171.139",
-			"219.224.171.138","219.224.171.137","219.224.171.136","219.224.171.135","219.224.171.134","219.224.171.133");
+	private List<String> hosts = Arrays.asList("219.224.171.143");
+//	private List<String> hosts = Arrays.asList("219.224.171.142","219.224.171.141","219.224.171.140","219.224.171.139",
+//			"219.224.171.138","219.224.171.137","219.224.171.136","219.224.171.135","219.224.171.134","219.224.171.133");
 	private final List<PKVService.Client> clients;
 	private final List<TTransport> trans;
 	private final int from;
@@ -121,7 +121,7 @@ public class PKVClient implements Runnable {
 					break;
 				}
 				long t2 = System.currentTimeMillis();
-				System.out.println(String.format("Time:%.3f",(t2-t1)/1000.0));
+				System.out.println("Total time: "+String.format("Time:%.3f",(t2-t1)/1000.0));
 			}
 		
 		} catch (Exception e) {
@@ -152,7 +152,7 @@ public class PKVClient implements Runnable {
 		try {
 			transport.open();
 		} catch (TTransportException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		if (transport.isOpen())
@@ -180,7 +180,7 @@ public class PKVClient implements Runnable {
 			try {
 				ret += clients.get(ran.nextInt(clients.size())).batchInsertObjects(objs);
 			} catch (TException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 				System.out.println("ERROR "+sindex);
 				return;
@@ -369,23 +369,42 @@ public class PKVClient implements Runnable {
 		System.out.println(zero);
 	}
 	
+	/**
+	 * Query data items from the inserted data items with specified values.
+	 * The specified values are random picked from the inserted data items.
+	 * 
+	 * @param objs inserted data items
+	 * @throws TException
+	 */
 	public void pyramidPointQuery(List<SPKVObject> objs) throws TException {
 		Random ran = new Random();
 		int s = 0;
 		int zero = 0;
-		for (int i = 0;i < 1000;i++)
+		for (int i = 0;i < 10;i++)
 		{
 			SPKVObject obj = objs.get(ran.nextInt(objs.size()));
+			PKVService.Client client = clients.get(ran.nextInt(clients.size()));
+			List<SPColumn> colsList = obj.getCols();
+			for(SPColumn col: colsList){
+				System.out.print(col.getValue()+" ");
+			}
+			System.out.println();
 			//µ„≤È—ØCount
-			int t = clients.get(ran.nextInt(clients.size())).pointQuery(tableName, obj.getCols(), contents).size();
+			int t = client.pointQuery(tableName, obj.getCols(), contents).size();
 			s += t;
 			if (t == 0)
 				zero++;
 		}
-		System.out.println(s);
+		System.out.println("Found "+s);
 		System.out.println(zero);
 	}
 	
+	/**
+	 * Read the data from data file.
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public List<SPKVObject> inputSPKVObject(int start, int end) {
 		String fileName = FILE_PATH+dimension+"\\"+tableName+"-"+dimension+"-"+String.format("%02d", offset)+".dat";
 //		String fileName = FILE_PATH+tableName+"-"+dimension+"-"+String.format("%02d", offset)+".dat";
@@ -413,13 +432,13 @@ public class PKVClient implements Runnable {
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return objects;
@@ -460,16 +479,16 @@ public class PKVClient implements Runnable {
 			}
 			in.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return objects;
@@ -525,16 +544,16 @@ public class PKVClient implements Runnable {
 			if (rewrite)
 				out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return objects;

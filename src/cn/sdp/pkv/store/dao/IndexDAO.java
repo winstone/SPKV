@@ -153,7 +153,7 @@ public abstract class IndexDAO {
 			boolean flag = true;
 			for (int j = 0;j < v.length;j++)
 			{
-				if (cols.get(j) >= 0 && cols.get(j) != (Integer)v[j])
+				if (cols.get(j) >= 0 && !cols.get(j).equals(v[j]))
 				{
 					flag = false;
 					break;
@@ -181,7 +181,7 @@ public abstract class IndexDAO {
 			boolean flag = true;
 			for (int j = 0;j < v.length;j++)
 			{
-				if (cols.get(j) >= 0 && cols.get(j) != (Integer)v[j])
+				if (cols.get(j) >= 0 && !cols.get(j).equals(v[j]))
 				{
 					flag = false;
 					break;

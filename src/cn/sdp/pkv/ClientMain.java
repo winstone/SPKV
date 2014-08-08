@@ -16,7 +16,7 @@ public class ClientMain {
 	public static void main(String[] args) throws InterruptedException {
 //		ConcurrentTest();
 
-		Thread thread = new Thread(new PKVClient(0, 100000, 0, false)); 
+		Thread thread = new Thread(new PKVClient(0, 5000, 0, false)); 
 		thread.start();
 
 //		for (int k = 10;k < 20;k++)

@@ -59,8 +59,8 @@ public class PyramidTest {
 //		List<SPKVObject> testobjs = inputSPKVObject(00000, 10000, 0);
 //		System.out.println("Loaded");  
 		long t1 = System.currentTimeMillis();
-		for (int i = 0;i < 20;i++)
-			generateSPKVObjects(5000000, 5000000*i);
+		for (int i = 0;i < 1;i++)
+			generateSPKVObjects(5, 5*i);
 		
 //		generateRealPartObject();
 		//建立新表
@@ -352,13 +352,18 @@ public class PyramidTest {
 	}
 
 	/**
-	 * Generate random data and store the generated data into a file.
+	 * Generate random data and store the generated data into a file. The
+	 * generated data should be not overlapped. So the offset begins from 0, and
+	 * after each generating, the offset should plus the size variable.
+	 * 
 	 * @param size
+	 *            data size
 	 * @param offset
+	 *            generated data's offset
 	 */
 	public static void generateSPKVObjects(int size, int offset)
 	{
-		int fileOffset = offset / 5000000;
+		int fileOffset = offset / size;
 		String fileName = FILE_PATH+dimension+"\\"+tableName+"-"+dimension+"-"+String.format("%02d", fileOffset)+".dat";
 		Random ran = new Random();
 		String strkey = "";
@@ -384,6 +389,7 @@ public class PyramidTest {
 				}
 				sb.append(content);
 				
+				System.out.println("Insert data:"+sb.toString());
 				out.write(sb.toString().getBytes("utf-8"));
 			}
 			out.close();
